@@ -1,53 +1,53 @@
-# Aplikasi Rekomendasi Pekerjaan Berdasarkan CV
+# Job Recommendation Application Based on CV
 
-Aplikasi ini memberikan rekomendasi pekerjaan berdasarkan CV yang diunggah pengguna. Dengan memanfaatkan model machine learning dan teknik pemrosesan teks, aplikasi ini mencocokkan keterampilan yang tercantum di CV dengan daftar pekerjaan yang tersedia dan memberikan tiga rekomendasi pekerjaan dengan nilai kecocokan tertinggi.
+This application provides job recommendations based on the user's uploaded CV. By leveraging machine learning models and text processing techniques, the app matches the skills listed in the CV with available job listings and suggests the top three jobs with the highest matching scores.
 
-## Cara Kerja File
-Setiap file dalam proyek ini memiliki fungsi dan peran spesifik yang mendukung keseluruhan sistem. Berikut adalah penjelasan bagaimana semua file bekerja:
+## How the Files Work
+Each file in this project has a specific role to support the overall system. Below is an explanation of how each file functions:
 
 1. **app.py**  
-   File utama yang berisi API untuk menjalankan aplikasi.  
-   - **Fungsi utama:**  
-     - Route `/recommend`: Mengambil CV dalam format teks sebagai input, memprosesnya melalui pipeline (preprocessing, parsing skill, matching score), dan menghasilkan rekomendasi pekerjaan.
+   The main file containing the API to run the application.  
+   - **Main functions:**  
+     - Route `/recommend`: Accepts a CV in text format as input, processes it through a pipeline (preprocessing, skill parsing, matching score calculation), and generates job recommendations.
 
 2. **matching_model.h5**  
-   Model deep learning yang dilatih untuk mencocokkan skor keterampilan di CV dengan skor keterampilan dalam daftar pekerjaan.  
+   A deep learning model trained to match skill scores from the CV with skill scores in the job listings.  
    - **Input:**  
-     - Vektor keterampilan yang diproses dari CV dan daftar pekerjaan.  
+     - Skill vectors processed from the CV and job listings.  
    - **Output:**  
-     - Skor kecocokan untuk setiap pekerjaan dalam daftar.  
+     - Matching scores for each job in the list.  
 
 3. **tfidf_vectorizer.json**  
-   Berisi representasi vektor TF-IDF yang digunakan untuk memastikan pemrosesan teks konsisten selama proses preprocessing dan pencocokan.  
-   - **Fungsi:**  
-     - Mengonversi teks skill menjadi vektor numerik untuk digunakan dalam model.  
+   Contains the TF-IDF vectorizer representation to ensure consistent text processing during preprocessing and matching.  
+   - **Function:**  
+     - Converts skill text into numerical vectors to be used by the model.  
 
 4. **valid_skills.json**  
-   File JSON yang berisi daftar keterampilan yang valid.  
-   - **Fungsi:**  
-     - Parsing bagian keterampilan dalam CV dan memvalidasi keterampilan tersebut berdasarkan daftar keterampilan yang diakui.  
+   A JSON file containing a list of valid skills.  
+   - **Function:**  
+     - Parses the skill section from the CV and validates the skills against the recognized skill list.  
 
 5. **requirements.txt**  
-   Berisi daftar pustaka Python yang diperlukan untuk menjalankan aplikasi.  
-   - **Digunakan untuk:**  
-     - Memastikan semua dependensi diinstal dengan versi yang kompatibel.
+   A file listing the Python libraries required to run the application.  
+   - **Used for:**  
+     - Ensuring all dependencies are installed with compatible versions.
 
-## Alur Kerja Sistem
-1. **Input CV:**  
-   Pengguna memberikan CV dalam format teks melalui endpoint `/recommend`.  
+## System Workflow
+1. **CV Input:**  
+   The user uploads a CV in text format via the `/recommend` endpoint.  
 
-2. **Preprocessing dan Parsing Skill:**  
-   - CV diproses untuk mengekstrak bagian keterampilan.  
-   - Keterampilan yang diekstrak divalidasi dengan daftar keterampilan dalam `valid_skills.json`.  
+2. **Preprocessing and Skill Parsing:**  
+   - The CV is processed to extract the skill section.  
+   - Extracted skills are validated against the list in `valid_skills.json`.  
 
 3. **Matching Score:**  
-   - Keterampilan yang divalidasi diubah menjadi vektor TF-IDF menggunakan `tfidf_vectorizer.json`.  
-   - Vektor keterampilan dibandingkan dengan vektor keterampilan dalam daftar pekerjaan menggunakan model `matching_model.h5`.  
+   - Validated skills are converted into TF-IDF vectors using `tfidf_vectorizer.json`.  
+   - The skill vectors are compared with the vectors in the job listings using the `matching_model.h5` model.  
 
-4. **Rekomendasi Pekerjaan:**  
-   - Tiga pekerjaan dengan nilai kecocokan tertinggi dipilih dari daftar pekerjaan.  
+4. **Job Recommendations:**  
+   - The top three jobs with the highest matching scores are selected from the job list.  
 
 5. **Output:**  
-   - API memberikan respons berupa JSON yang berisi:  
-     - **Keterampilan yang dikenali dari CV.**  
-     - **Tiga pekerjaan yang direkomendasikan beserta skor kecocokan.**
+   - The API responds with a JSON containing:  
+     - **Recognized skills from the CV.**  
+     - **Top three recommended jobs along with their matching scores.**
