@@ -1,6 +1,0 @@
-pandas
-PyPDF2
-google-colab
-scikit-learn
-tensorflow
-transformers
